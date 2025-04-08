@@ -1,12 +1,15 @@
 from pydantic_settings import BaseSettings
-import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 class Settings(BaseSettings):
-    DB_URL: str = os.getenv("DB_URL")
-    API_HASH: str = os.getenv("API_HASH")
-    API_ID: int = os.getenv("API_ID")
+    DB_URL: str
+    API_ID: int
+    API_HASH: str
+    TDATA_PATH: str
 
-
+    class Config:
+        env_file = ".env"
 
 settings = Settings()

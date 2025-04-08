@@ -1,4 +1,4 @@
-from database.database import AsyncSession
+from database.database import get_session, AsyncSession
 from database.models import Accounts
 from sqlalchemy import select
 
@@ -31,3 +31,7 @@ class RepositoryAccounts:
             await self.session.commit()
             return f"Аккаунт '{account.name}' удалён"
         return f"Аккаунт '{name}' не найден"
+
+async def get_accounts(session: get_session) -> list[Accounts]:
+    db_session = await session or get_session()
+    return RepositoryAccounts(db_session)
