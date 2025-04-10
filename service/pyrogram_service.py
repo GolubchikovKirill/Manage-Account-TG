@@ -77,7 +77,7 @@ async def main_pyrogram():
         os.path.splitext(f)[0]
         for f in os.listdir(tdata_path)
         if f.endswith(".session")
-    ] or ["default_session"]  # Fallback
+    ] or ["default_session"]
 
     await asyncio.gather(*[process_session(s) for s in sessions])
 

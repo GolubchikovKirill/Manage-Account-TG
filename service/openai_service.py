@@ -18,8 +18,8 @@ async def generate_name():
     """Генерирует случайные имя и фамилию"""
     try:
         prompt = "Сгенерируй реалистичное русское имя и фамилию."
-        response = await openai.ChatCompletion.create(  # Используйте ChatCompletion
-            model="gpt-3.5-turbo",  # Или gpt-4, если нужно
+        response = await openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt}
@@ -36,8 +36,8 @@ async def generate_comment(post_text: str):
     """Генерирует правдоподобный комментарий на основе текста поста"""
     prompt = f"{random.choice(COMMENT_PROMPTS)}\n\n{post_text}"
     try:
-        response = await openai.ChatCompletion.create(  # Используйте ChatCompletion
-            model="gpt-3.5-turbo",  # Или gpt-4, если нужно
+        response = await openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt}
