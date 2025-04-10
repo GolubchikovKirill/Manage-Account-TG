@@ -10,6 +10,7 @@ class Accounts(Base):
     status: Mapped[bool] = mapped_column(Boolean)
     name: Mapped[str] = mapped_column(index=True)
     last_name: Mapped[str] = mapped_column(index=True)
+    phone_number: Mapped[str] = mapped_column(index=True) # Нужен?
     session_data: Mapped[int] = mapped_column(ForeignKey("Proxy.id"), index=True)
 
 
