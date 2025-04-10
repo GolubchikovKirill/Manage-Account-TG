@@ -116,3 +116,6 @@ websockets==15.0
 xattr==1.1.4
 yarl==1.14.0
 zstandard==0.23.0
+
+Booktype~=1.5
+Telethon~=1.39.0
