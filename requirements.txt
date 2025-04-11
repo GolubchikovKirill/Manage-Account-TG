@@ -119,3 +119,4 @@ zstandard==0.23.0
 
 Booktype~=1.5
 Telethon~=1.39.0
+aiotdlib~=0.26.1

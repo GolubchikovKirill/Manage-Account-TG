@@ -1,54 +1,23 @@
-import json
-import redis.asyncio as redis
-from settings import settings
 from contextlib import asynccontextmanager
 
-# Инициализация Redis клиента с использованием настроек
-redis_client = redis.from_url(
-    f"redis://{settings.redis_host}:{settings.redis_port}/{settings.redis_db}",
-    password=settings.redis_password if settings.redis_password else None,
-    decode_responses=True  # автоматически декодировать ответы в строки
-)
-
-# Context manager для работы с Redis
+# Заглушка для Redis
 @asynccontextmanager
 async def redis_connection():
-    try:
-        # Используем клиент с пулом соединений
-        yield redis_client
-    finally:
-        # Закрытие соединения при завершении работы
-        await redis_client.close()
+    # Возвращаем "пустой" клиент
+    yield None
 
-# Функция для добавления задачи в поток Redis
+# Функция для добавления задачи в поток (заглушка)
 async def add_to_stream(stream_name: str, message: dict):
-    async with redis_connection() as client:
-        await client.xadd(stream_name, message)
+    pass
 
-# Функция для получения сообщений из потока Redis
+# Функция для получения сообщений из потока (заглушка)
 async def get_messages_from_stream(stream_name: str, count: int = 10):
-    async with redis_connection() as client:
-        # Получение сообщений из потока
-        messages = await client.xrange(stream_name, count=count)
-        return [json.loads(msg[b"message"].decode("utf-8")) for msg in messages]
+    return []
 
-# Проверка лимита частоты через Redis
+# Проверка лимита частоты через Redis (заглушка)
 async def check_rate_limit(account_id: int, limit: int = 5, window: int = 60):
-    async with redis_connection() as client:
-        key = f"rate_limit:{account_id}"
-        # Получаем текущее значение счетчика
-        count = await client.get(key)
-        if count is None:
-            # Если счетчик не существует, создаем его и устанавливаем TTL
-            await client.setex(key, window, 1)
-            return True
-        elif int(count) < limit:
-            # Если лимит не превышен, увеличиваем счетчик
-            await client.incr(key)
-            return True
-        return False
+    return True
 
-# Пинг Redis
+# Пинг Redis (заглушка)
 async def ping():
-    async with redis_connection() as client:
-        await client.ping()
+    pass

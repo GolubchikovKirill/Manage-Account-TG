@@ -34,4 +34,4 @@ class Channels(Base):
     account_id: Mapped[int] = mapped_column(ForeignKey("Accounts.id"), index=True)
     comment: Mapped[str] = mapped_column(Text)
 
-    account: Mapped["Accounts"] = relationship("Accounts", backref="сhannels")
+    account: Mapped["Accounts"] = relationship("Accounts", backref="channels")

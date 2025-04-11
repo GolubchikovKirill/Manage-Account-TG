@@ -6,6 +6,6 @@ from schema_pydantic.schemas import  (
 )
 
 schemas = [
-    "ChannelOut",
-    "ChannelCreate",
+    ChannelOut,
+    ChannelCreate,
 ]
